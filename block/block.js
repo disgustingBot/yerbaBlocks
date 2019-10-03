@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 const { RichText, MediaUpload } = wp.editor;
 const { registerBlockType } = wp.blocks;
@@ -54,7 +55,20 @@ registerBlockType( 'card-block/home-atf', {
 		const getcad3ImgButton = openEvent => attributes.card3Url ? <img src={ attributes.card3Url } onClick={ openEvent } className={ 'standarCardImg itemImg' } alt={ 'si' } /> : <div className={ 'standarCardImg itemImg' }><Button onClick={ openEvent } className="button button-large" >Pick an image</Button></div>;
 
 		const textChangedHandler = ( event, id ) => {
-			const cardIndex = this.attributes.cards.findIndex( p => { return p.id === id; } );
+			const cardIndex = this.attributes.cards.findIndex( p => {
+				return p.id === id;
+			} );
+			const card = { ...this.attributes.cards[ cardIndex ] };
+			// const card = Object.assign({}, this.attributes.cards[cardIndex])
+			card.name = event.target.value;
+			const cards = [ ...this.attributes.cards ];
+			cards[ cardIndex ] = card;
+			this.setAttributes( { cards: cards } );
+		};
+		const imgChangedHandler = ( event, id ) => { console.log(attributes);
+			const cardIndex = attributes.cards.findIndex( p => {
+				return p.id === id;
+			} );
 			const card = { ...this.attributes.cards[ cardIndex ] };
 			// const card = Object.assign({}, this.attributes.cards[cardIndex])
 			card.name = event.target.value;
@@ -72,6 +86,9 @@ registerBlockType( 'card-block/home-atf', {
 						txt={ card.txt }
 						key={ card.id }
 						abc={ card.id }
+						// select={ media => { setAttributes( { card.url: media.url, card.alt: media.alt } ); } }
+						select={ ( event )=>imgChangedHandler( event, card.id ) }
+						render={ ( { open } ) => getLogoButton( open ) }
 						changed={ ( event )=>textChangedHandler( event, card.id ) }
 					></TestEdit>;
 				} ) }
@@ -172,33 +189,33 @@ registerBlockType( 'card-block/home-atf', {
 	},
 	save( { attributes } ) {
 		const backgroundVideo = src => src ? <video className="videoATF" loop="loop" autoPlay={ 'true' } playsinline={ 'true' } muted={ 'true' }><source className={ 'videoATFSrc' } src={ src }></source></video> : null;
-		const logoImage = ( src, alt, className ) => src ? <img src={ src } className={ className } alt={ alt } /> : null;
+		const image = ( src, alt, className ) => src ? <img src={ src } className={ className } alt={ alt } /> : null;
 
 		return (
 			<section className="ATF">
 				{ backgroundVideo( attributes.videoUrl ) }
 
 				<figure className="ATFIsoLogo">
-					{ logoImage( attributes.logoUrl, attributes.logoAlt, 'ATFLogo itemImg' ) }
+					{ image( attributes.logoUrl, attributes.logoAlt, 'ATFLogo itemImg' ) }
 					<figcaption className="ATFtitle specialTitle">
 						<h2 className="copyATF">{ attributes.copyATF }</h2>
 					</figcaption>
 				</figure>
 
 				<figure className="cards cardsATF cardATF1">
-					{ logoImage( attributes.card1Url, attributes.card1Alt, 'standarCardImg itemImg' ) }
+					{ image( attributes.card1Url, attributes.card1Alt, 'standarCardImg itemImg' ) }
 					<figcaption className="cardsTxt specialTitle">
 						<h3 className="card1Text">{ attributes.card1Text }</h3>
 					</figcaption>
 				</figure>
 				<figure className="cards cardsATF cardATF2">
-					{ logoImage( attributes.card2Url, attributes.card2Alt, 'standarCardImg itemImg' ) }
+					{ image( attributes.card2Url, attributes.card2Alt, 'standarCardImg itemImg' ) }
 					<figcaption className="cardsTxt specialTitle">
 						<h3 className="card2Text">{ attributes.card2Text }</h3>
 					</figcaption>
 				</figure>
 				<figure className="cards cardsATF cardATF3">
-					{ logoImage( attributes.card3Url, attributes.card3Alt, 'standarCardImg itemImg' ) }
+					{ image( attributes.card3Url, attributes.card3Alt, 'standarCardImg itemImg' ) }
 					<figcaption className="cardsTxt specialTitle">
 						<h3 className="card3Text">{ attributes.card3Text }</h3>
 					</figcaption>
