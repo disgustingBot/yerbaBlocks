@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // Stripped down version of src/block/block.js
 
 // PART 1: Import dependencies
@@ -6,6 +7,7 @@ import './style.scss';
 
 // PART 2: Setup references to external functions
 const { __ } = wp.i18n;
+const { RichText, MediaUpload } = wp.editor;
 const { registerBlockType } = wp.blocks;
 const { Button } = wp.components;
 
@@ -28,14 +30,14 @@ const testBlock = {
 	testEdit: props => {
 		return (
 			<figure className="cards cardsATF cardATF3">
-				{ /* <MediaUpload
-					onSelect={ media => {
-						setAttributes( { url: media.url, alt: media.alt } );
-					} }
+				<MediaUpload
+					onSelect={ props.select }
+					// onSelect={ media => { setAttributes( { url: media.url, alt: media.alt } ); } }
 					type="image"
 					value={ props.url }
-					render={ ( { open } ) => getLogoButton( open ) }
-				/> */ }
+					render={ props.render }
+					// render={ ( { open } ) => getLogoButton( open ) }
+				/>
 				<figcaption className="cardsTxt specialTitle">
 					<h3 className="card3Text" contentEditable={ 'true' } >{ props.abc }</h3>
 				</figcaption>
