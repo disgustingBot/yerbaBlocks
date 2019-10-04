@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // Stripped down version of src/block/block.js
 
 // PART 1: Import dependencies
@@ -6,6 +7,7 @@ import './style.scss';
 
 // PART 2: Setup references to external functions
 const { __ } = wp.i18n;
+const { RichText, MediaUpload } = wp.editor;
 const { registerBlockType } = wp.blocks;
 const { Button } = wp.components;
 
@@ -22,22 +24,32 @@ const testBlock = {
 	],
 	attributes: {
 		firstText: { type: 'string', default: 'Lorem Ipsum' },
-		abc: { type: 'string', default: 'Lorem Ipsum' },
+		id: { type: 'string', default: 'Lorem Ipsum' },
+		url: { type: 'string', default: 'Lorem Ipsum' },
+		alt: { type: 'string', default: 'Lorem Ipsum' },
+		txt: { type: 'string', default: 'Lorem Ipsum' },
 	},
 
 	testEdit: props => {
 		return (
 			<figure className="cards cardsATF cardATF3">
-				{ /* <MediaUpload
-					onSelect={ media => {
-						setAttributes( { url: media.url, alt: media.alt } );
-					} }
+				<MediaUpload
+					onSelect={ props.select }
+					// onSelect={ media => { setAttributes( { url: media.url, alt: media.alt } ); } }
 					type="image"
 					value={ props.url }
-					render={ ( { open } ) => getLogoButton( open ) }
-				/> */ }
+					render={ props.render }
+					// render={ ( { open } ) => getLogoButton( open ) }
+				/>
 				<figcaption className="cardsTxt specialTitle">
-					<h3 className="card3Text" contentEditable={ 'true' } >{ props.abc }</h3>
+					<h3 className="card3Text">
+						{ /* { props.abc } */ }
+						<RichText
+							onChange={ props.change }
+							value={ props.txt }
+							placeholder="Your card text"
+						/>
+					</h3>
 				</figcaption>
 			</figure>
 		);
@@ -54,18 +66,19 @@ const testBlock = {
 	// PART 3.2: Markup in editor
 	// edit: testEdit( this.attributes ),
 	edit( { attributes, setAttributes } ) {
-		const getLogoButton = openEvent => attributes.logoUrl ? <img src={ attributes.logoUrl } onClick={ openEvent } className="ATFLogo itemImg" alt={ 'si' } /> : <div className={ 'ATFLogo itemImg' }><Button onClick={ openEvent } className="button button-large" >Pick a Logo image</Button></div>;
-
+		const render = openEvent => attributes.logoUrl ? <img src={ attributes.logoUrl } onClick={ openEvent } className="ATFLogo itemImg" alt={ 'si' } /> : <div className={ 'ATFLogo itemImg' }><Button onClick={ openEvent } className="button button-large" >Pick a Logo image</Button></div>;
+		const select = media => { setAttributes( { url: media.url, alt: media.alt } ); }
+		const change = content => setAttributes( { copyATF: content } )
+		const props = { ...attributes, render, select, change }
 		return (
 			<div>
-				{ testBlock.testEdit( attributes ) }
-
+				{ testBlock.testEdit( props ) }
 			</div>
 		);
 	},
 
 	// PART 3.3: Markup saved to database
-	save( { attributes, setAttributes } ) {
+	save( { attributes } ) {
 		return (
 			testBlock.testSave( attributes )
 		);
