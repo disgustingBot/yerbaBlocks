@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /**
  * Gutenberg Blocks
  *
@@ -9,5 +10,6 @@
  * Webpack is compiling as the input file.
  */
 
-import './block/block.js';
-import './block/block-old.js';
+import './homeATF/homeATF.js';
+import './fp-section/fp-section.js';
+// import './homeATF/block-old.js.js';
