@@ -13,4 +13,5 @@
 import './homeATF/homeATF.js';
 import './fp-section/fp-section.js';
 import './item5050/item5050.js';
+import './gastronomia-item/gastronomia-item.js';
 // import './homeATF/block-old.js.js';
