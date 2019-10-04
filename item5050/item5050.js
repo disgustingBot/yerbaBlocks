@@ -18,7 +18,7 @@ registerBlockType( 'gutentag/item5050', {
 
 		return (
       <figure class="item5050 SectionItem">
-        <img src="<?php echo get_template_directory_uri(); ?>/img/home/view-sandy-beach_23-2147836788.jpg" alt="" class="item5050Img itemImg">
+        <img src="<?php echo get_template_directory_uri(); ?>/img/home/view-sandy-beach_23-2147836788.jpg" alt="" class="item5050Img itemImg" />
         <figcaption class="localizacionItemFigcaption itemTitleCenter itemTitle">
           <a href="#"><h5>Ibiza</h5></a>
         </figcaption>
@@ -31,7 +31,7 @@ registerBlockType( 'gutentag/item5050', {
 
 		return (
       <figure class="item5050 SectionItem">
-        <img src="<?php echo get_template_directory_uri(); ?>/img/home/view-sandy-beach_23-2147836788.jpg" alt="" class="item5050Img itemImg">
+        <img src="<?php echo get_template_directory_uri(); ?>/img/home/view-sandy-beach_23-2147836788.jpg" alt="" class="item5050Img itemImg" />
         <figcaption class="localizacionItemFigcaption itemTitleCenter itemTitle">
           <a href="#"><h5>Ibiza</h5></a>
         </figcaption>
