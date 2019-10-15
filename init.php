@@ -34,7 +34,7 @@ function gutentag_cgb_block_assets() { // phpcs:ignore
 	wp_register_script(
 		'gutentag-js', // Handle.
 		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
-		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), // Dependencies, defined above.
+		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-api' ), // Dependencies, defined above.
 		null, // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
 		true // Enqueue the script in the footer.
 	);
@@ -60,14 +60,38 @@ function gutentag_cgb_block_assets() { // phpcs:ignore
 	 * @link https://wordpress.org/gutenberg/handbook/blocks/writing-your-first-block-type#enqueuing-block-scripts
 	 * @since 1.16.0
 	 */
-	register_block_type( 'gutentag/home-atf', array( 'editor_script' => 'gutentag-js', ) );
+ 	register_block_type( 'gutentag/home-atf', array( 'editor_script' => 'gutentag-js', ) );
+	register_block_type( 'gutentag/loc-atf', array( 'editor_script' => 'gutentag-js', ) );
+ 	register_block_type( 'gutentag/section', array( 'editor_script' => 'gutentag-js', ) );
+
+	register_block_type( 'gutentag/card', array( 'editor_script' => 'gutentag-js', ) );
+	register_block_type( 'gutentag/simple-card', array( 'editor_script' => 'gutentag-js', ) );
+	register_block_type( 'gutentag/hidshow', array( 'editor_script' => 'gutentag-js', ) );
+
+
 
 	register_block_type( 'gutentag/fp-section', array( 'editor_script' => 'gutentag-js', ) );
 
 	register_block_type( 'gutentag/item5050', array( 'editor_script' => 'gutentag-js', ) );
-
 	register_block_type( 'gutentag/gastronomia-item', array( 'editor_script' => 'gutentag-js', ) );
+
+	// register_block_type( 'gutentag/load-post', array( 'editor_script' => 'gutentag-js', ) );
+	// register_block_type( 'gutentag/load-cont', array( 'editor_script' => 'gutentag-js', ) );
 }
 
 // Hook: Block assets.
 add_action( 'init', 'gutentag_cgb_block_assets' );
+
+
+
+
+function my_mario_block_category( $categories, $post ) {
+	return array_merge(
+		$categories,
+		array(
+			array( 'slug' => 'multicard', 'title' => __( 'Cards', 'multicard' ), ),
+			array( 'slug' => 'sections', 'title' => __( 'Sections', 'sections' ), ),
+		)
+	);
+}
+add_filter( 'block_categories', 'my_mario_block_category', 10, 2);
