@@ -9,7 +9,7 @@ wp.hooks.addFilter( 'blocks.getBlockDefaultClassName', 'gutenTag', setBlockCusto
 registerBlockType( 'gutentag/item5050', {
 	title: 'item5050',
 	icon: 'heart',
-	category: 'common',
+	category: 'multicard',
 	attributes: {
 		itemTitleH5: { type: 'array', source: 'children', selector: '.itemTitleH5' },
 		item5050Img: { attribute: 'src', selector: '.item5050Img' },
