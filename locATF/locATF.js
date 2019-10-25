@@ -9,7 +9,7 @@ wp.hooks.addFilter( 'blocks.getBlockDefaultClassName', 'gutenTag', setBlockCusto
 registerBlockType( 'gutentag/loc-atf', {
 	title: 'Location ATF',
 	icon: 'heart',
-	category: 'multicard',
+	category: 'sections',
 	attributes: {
 		cardTitle: { type: 'array', source: 'children', selector: '.locATFTitle' },
 		cardTxt: { type: 'array', source: 'children', selector: '.locATFTxt' },
@@ -32,14 +32,14 @@ registerBlockType( 'gutentag/loc-atf', {
 					render={ ( { open } ) => getImgButton( open ) }
 				/>
         <figcaption className="locATFCaption rowcol1">
-          <h3 className="cardTitle centerTitle specialTitle">
+          <h3 className="locATFTitle centerTitle specialTitle">
 						<RichText
 							onChange={ content => setAttributes( { cardTitle: content } ) }
 							value={ attributes.cardTitle }
 							placeholder="contenido"
 						/>
 					</h3>
-          <p className="cardTxt">
+          <p className="locATFTxt">
 						<RichText
 							onChange={ content => setAttributes( { cardTxt: content } ) }
 							value={ attributes.cardTxt }
@@ -59,7 +59,7 @@ registerBlockType( 'gutentag/loc-atf', {
 				{ image( attributes.cardImg, attributes.cardAlt, 'locATFImg rowcol1' ) }
         <figcaption className="locATFCaption rowcol1">
 					<h3 className="locATFTitle centerTitle specialTitle">{ attributes.cardTitle }</h3>
-					<p className="locATFTxt centerTitle specialTitle">{ attributes.cardTxt }</p>
+					<p className="locATFTxt">{ attributes.cardTxt }</p>
         </figcaption>
       </figure>
 		);

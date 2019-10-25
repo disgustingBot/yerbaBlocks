@@ -13,8 +13,11 @@
 import './locATF/locATF.js';
 import './homeATF/homeATF.js';
 import './section/section.js';
+import './flex/flex.js';
 
 import './card/card.js';
+import './mega/mega.js';
+import './show/show.js';
 import './simpleCard/simpleCard.js';
 import './hidshow/hidshow.js';
 
