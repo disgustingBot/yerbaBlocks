@@ -62,9 +62,12 @@ function gutentag_cgb_block_assets() { // phpcs:ignore
 	 */
  	register_block_type( 'gutentag/home-atf', array( 'editor_script' => 'gutentag-js', ) );
 	register_block_type( 'gutentag/loc-atf', array( 'editor_script' => 'gutentag-js', ) );
- 	register_block_type( 'gutentag/section', array( 'editor_script' => 'gutentag-js', ) );
+	register_block_type( 'gutentag/section', array( 'editor_script' => 'gutentag-js', ) );
+ 	register_block_type( 'gutentag/flex', array( 'editor_script' => 'gutentag-js', ) );
 
 	register_block_type( 'gutentag/card', array( 'editor_script' => 'gutentag-js', ) );
+	register_block_type( 'gutentag/mega', array( 'editor_script' => 'gutentag-js', ) );
+	register_block_type( 'gutentag/show', array( 'editor_script' => 'gutentag-js', ) );
 	register_block_type( 'gutentag/simple-card', array( 'editor_script' => 'gutentag-js', ) );
 	register_block_type( 'gutentag/hidshow', array( 'editor_script' => 'gutentag-js', ) );
 

@@ -1,6 +1,6 @@
-const { RichText, MediaUpload } = wp.editor;
+const { RichText, MediaUpload, InnerBlocks, InspectorControls } = wp.editor;
 const { registerBlockType } = wp.blocks;
-const { Button } = wp.components;
+const { Button, SelectControl, PanelBody, PanelRow, TextControl } = wp.components;
 
 // Our filter function
 function setBlockCustomClassName( className, blockName ) { return blockName === 'gutentag/hidshow' ? '' : className; }
@@ -16,12 +16,33 @@ registerBlockType( 'gutentag/hidshow', {
 		cardImg: { attribute: 'src', selector: '.hidshowImg' },
 		cardAlt: { attribute: 'alt', selector: '.hidshowImg' },
 
+		titlePosition: {default:'TR'},
 	},
 
 	edit( { attributes, setAttributes } ) {
 		const getImgButton = openEvent => attributes.cardImg ? <img src={ attributes.cardImg } onClick={ openEvent } className={ 'hidshowImg rowcol1' } alt={ 'si' } /> : <div className={ 'hidshowImg rowcol1' }><Button onClick={ openEvent } className="button button-large" >Pick an image</Button></div>;
 
-		return (
+		return [
+
+      <InspectorControls key='inspector'>
+				<PanelBody title='Settings' initialOpen='true'>
+					<PanelRow>
+						<SelectControl
+							onChange= {value => setAttributes( { titlePosition: value } )}
+							value={ attributes.titlePosition }
+							label={ 'Position of title' }
+							options={ [
+								{ label: 'Center',       value: 'C' },
+								{ label: 'Top Right',    value: 'TR' },
+								{ label: 'Top Left',     value: 'TL' },
+								{ label: 'Bottom Right', value: 'BR' },
+								{ label: 'Bottom Left',  value: 'BL' },
+							] }
+						/>
+					</PanelRow>
+				</PanelBody>
+      </InspectorControls>,
+
       <figure className="hidshow grid">
 				<MediaUpload
 					onSelect={ media => {
@@ -32,7 +53,7 @@ registerBlockType( 'gutentag/hidshow', {
 					render={ ( { open } ) => getImgButton( open ) }
 				/>
         <figcaption className="grid rowcol1">
-          <p className="itemTitle rowcol1 itemTitleTR">
+          <p className={ "itemTitle rowcol1 itemTitle" + attributes.titlePosition }>
 						<RichText
 							onChange={ content => setAttributes( { itemTitle: content } ) }
 							value={ attributes.itemTitle }
@@ -48,7 +69,7 @@ registerBlockType( 'gutentag/hidshow', {
 					</p>
         </figcaption>
       </figure>
-		);
+		];
 	},
 
 	save( { attributes } ) {
@@ -58,8 +79,8 @@ registerBlockType( 'gutentag/hidshow', {
       <figure className="hidshow grid">
 				{ image( attributes.cardImg, attributes.cardAlt, 'hidshowImg rowcol1' ) }
         <figcaption className="grid rowcol1">
-					<p className="itemTitle rowcol1 itemTitleTR">{ attributes.itemTitle }</p>
-					<p className="rowcol1 hidshowTxt">{ attributes.hidshowTxt }</p>
+					<p className={ "itemTitle rowcol1 itemTitle" + attributes.titlePosition }>{ attributes.itemTitle }</p>
+					{ attributes.hidshowTxt == [] ? <p className="rowcol1 hidshowTxt">{ attributes.hidshowTxt }</p> : null }
         </figcaption>
       </figure>
 		);
