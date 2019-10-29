@@ -80,7 +80,7 @@ registerBlockType( 'gutentag/hidshow', {
 				{ image( attributes.cardImg, attributes.cardAlt, 'hidshowImg rowcol1' ) }
         <figcaption className="grid rowcol1">
 					<p className={ "itemTitle rowcol1 itemTitle" + attributes.titlePosition }>{ attributes.itemTitle }</p>
-					{ attributes.hidshowTxt == [] ? <p className="rowcol1 hidshowTxt">{ attributes.hidshowTxt }</p> : null }
+					<p className="rowcol1 hidshowTxt">{ attributes.hidshowTxt }</p>
         </figcaption>
       </figure>
 		);
