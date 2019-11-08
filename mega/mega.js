@@ -17,7 +17,7 @@ registerBlockType( 'gutentag/mega', {
 		cardImg: { attribute: 'src', selector: '.megaImg' },
 		cardAlt: { attribute: 'alt', selector: '.megaImg' },
 
-		altStyle: {type:'array'}
+		altStyle: {type:'boolean', default: false}
 
 	},
 
@@ -38,7 +38,7 @@ registerBlockType( 'gutentag/mega', {
 				</PanelBody>
       </InspectorControls>,
 
-      <figure className="mega">
+      <figure className={ attributes.altStyle ?  "mega alt" : "mega" }>
 				<MediaUpload
 					onSelect={ media => {
 						setAttributes( { cardImg: media.url, cardAlt: media.alt } );
@@ -47,7 +47,7 @@ registerBlockType( 'gutentag/mega', {
 					value={ attributes.cardImg }
 					render={ ( { open } ) => getImgButton( open ) }
 				/>
-        <figcaption className={ attributes.altStyle ? "megaCaption alt" : "megaCaption" }>
+        <figcaption className="megaCaption">
           <h4 className="megaTitle centerTitle specialTitle">
 						<RichText
 							onChange={ content => setAttributes( { cardTitle: content } ) }
@@ -80,7 +80,7 @@ registerBlockType( 'gutentag/mega', {
 		const image = ( src, alt, className ) => src ? <img src={ src } className={ className } alt={ alt } /> : null;
 
 		return (
-      <figure className="mega">
+      <figure className={ attributes.altStyle ?  "mega alt" : "mega" }>
 				{ image( attributes.cardImg, attributes.cardAlt, 'megaImg' ) }
         <figcaption className="megaCaption">
 					<h4 className="megaTitle centerTitle specialTitle">{ attributes.cardTitle }</h4>
