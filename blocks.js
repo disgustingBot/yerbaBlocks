@@ -24,7 +24,6 @@ import './hidshow/hidshow.js';
 
 
 import './fp-section/fp-section.js';
-import './item5050/item5050.js';
 import './gastronomia-item/gastronomia-item.js';
 // import './loadPost/loadPost.js';
 // import './loadCont/loadCont.js';

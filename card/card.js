@@ -11,7 +11,7 @@ registerBlockType( 'gutentag/card', {
 	icon: 'heart',
 	category: 'multicard',
 	attributes: {
-		cardTxt: { type: 'array', source: 'children', selector: '.cardTxt' },
+		cardTxt: { type: 'array', source: 'children', selector: '.cardTitleTxt' },
 		cardImg: { attribute: 'src', selector: '.cardImg' },
 		cardAlt: { attribute: 'alt', selector: '.cardImg' },
 
@@ -31,13 +31,13 @@ registerBlockType( 'gutentag/card', {
 					render={ ( { open } ) => getImgButton( open ) }
 				/>
         <figcaption className="cardTitle specialTitle">
-          <h5 className="cardTxt">
+          <h3 className="cardTitleTxt">
 						<RichText
 							onChange={ content => setAttributes( { cardTxt: content } ) }
 							value={ attributes.cardTxt }
 							placeholder="contenido"
 						/>
-					</h5>
+					</h3>
         </figcaption>
       </figure>
 		);
@@ -50,7 +50,7 @@ registerBlockType( 'gutentag/card', {
       <figure className="card">
 				{ image( attributes.cardImg, attributes.cardAlt, 'standarCardImg' ) }
         <figcaption className="cardTitle specialTitle">
-					<h5 className="cardTxt">{ attributes.cardTxt }</h5>
+					<h3 className="cardTitleTxt">{ attributes.cardTxt }</h3>
         </figcaption>
       </figure>
 		);

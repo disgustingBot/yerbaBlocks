@@ -21,7 +21,7 @@ registerBlockType( 'gutentag/home-atf', {
 		videoUrl: { attribute: 'src', selector: '.homeATFvideoSrc' },
 		logoUrl: { attribute: 'src', selector: '.homeATFLogo' },
 		logoAlt: { attribute: 'alt', selector: '.homeATFLogo' },
-		copyATF: { type: 'array', source: 'children', selector: '.homeATFcopy' },
+		copyATF: { type: 'array', source: 'children', selector: '.homeATFCopy' },
 		cantCol: { type: 'string', },
 	},
 
@@ -67,7 +67,7 @@ registerBlockType( 'gutentag/home-atf', {
 						render={ ( { open } ) => getLogoButton( open ) }
 					/>
 					<figcaption className="specialTitle">
-						<h2 className="homeATFcopy">
+						<h2 className="homeATFCopy">
 							<RichText
 								onChange={ content => setAttributes( { copyATF: content } ) }
 								value={ attributes.copyATF }
@@ -94,7 +94,7 @@ registerBlockType( 'gutentag/home-atf', {
 				<figure className="homeATFIsoLogo rowcol1">
 					{ image( attributes.logoUrl, attributes.logoAlt, 'homeATFLogo' ) }
 					<figcaption className="specialTitle">
-						<h2 className="homeATFcopy">{ attributes.copyATF }</h2>
+						<h2 className="homeATFCopy">{ attributes.copyATF }</h2>
 					</figcaption>
 				</figure>
 

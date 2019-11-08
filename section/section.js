@@ -14,11 +14,12 @@ registerBlockType( 'gutentag/section', {
 	attributes: {
 		figureImg: { attribute: 'src', selector: '.standarCardImg' },
 		figureAlt: { attribute: 'alt', selector: '.standarCardImg' },
+		id: { },
 		cbbcEs: { type: 'array', source: 'children', selector: '.cbbcEs' },
 		superTitle: { type: 'array', source: 'children', selector: '.superTitle' },
 		standardCardTitle: { type: 'array', source: 'children', selector: '.standardCardTitle' },
 		cardTxt: { type: 'array', source: 'children', selector: '.cardTxt' },
-		extraClass: { type: 'string', },
+		extraClass: { type: 'string', default: "" },
 		cantCol: { type: 'string', default: 2 },
 
 	},
@@ -44,6 +45,13 @@ registerBlockType( 'gutentag/section', {
 					</PanelRow>
 					<PanelRow>
 						<TextControl
+							label='Id for Front-page navigation:'
+							onChange= {value => setAttributes( { id: value } )}
+							value={ attributes.id }
+						/>
+					</PanelRow>
+					<PanelRow>
+						<TextControl
 							label='Extra class for flex:'
 							onChange= {value => setAttributes( { extraClass: value } )}
 							value={ attributes.extraClass }
@@ -53,7 +61,7 @@ registerBlockType( 'gutentag/section', {
       </InspectorControls>,
 
 
-			<section className="section">
+			<section className="section" id={ attributes.id } data-target={ attributes.id + 'Link' }>
 		    <h4 className="sectionTitle specialTitle rowcol1 colMax">
 		      <span className="cbbcEs">
 						<RichText
@@ -108,7 +116,7 @@ registerBlockType( 'gutentag/section', {
 		const image = ( src, alt, className ) => src ? <img src={ src } className={ className } alt={ alt } /> : null;
 
 		return (
-			<section className="section">
+			<section className="section" id={ attributes.id } data-target={ attributes.id + 'Link' }>
 				<h4 className="sectionTitle specialTitle rowcol1 colMax">
 					<span className="cbbcEs">{ attributes.cbbcEs }</span>
 					<span className="superTitle">{ attributes.superTitle }</span>

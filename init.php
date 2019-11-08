@@ -75,7 +75,6 @@ function gutentag_cgb_block_assets() { // phpcs:ignore
 
 	register_block_type( 'gutentag/fp-section', array( 'editor_script' => 'gutentag-js', ) );
 
-	register_block_type( 'gutentag/item5050', array( 'editor_script' => 'gutentag-js', ) );
 	register_block_type( 'gutentag/gastronomia-item', array( 'editor_script' => 'gutentag-js', ) );
 
 	// register_block_type( 'gutentag/load-post', array( 'editor_script' => 'gutentag-js', ) );
