@@ -60,7 +60,7 @@ registerBlockType( 'gutentag/hidshow', {
 							placeholder="contenido"
 						/>
 					</p>
-          <p className="rowcol1 hidshowTxt">
+          <p className="hidshowTxt rowcol1">
 						<RichText
 							onChange={ content => setAttributes( { hidshowTxt: content } ) }
 							value={ attributes.hidshowTxt }
@@ -80,7 +80,7 @@ registerBlockType( 'gutentag/hidshow', {
 				{ image( attributes.cardImg, attributes.cardAlt, 'hidshowImg rowcol1' ) }
         <figcaption className="grid rowcol1">
 					<p className={ "itemTitle rowcol1 itemTitle" + attributes.titlePosition }>{ attributes.itemTitle }</p>
-					<p className="rowcol1 hidshowTxt">{ attributes.hidshowTxt }</p>
+					<p className="hidshowTxt rowcol1">{ attributes.hidshowTxt }</p>
         </figcaption>
       </figure>
 		);
