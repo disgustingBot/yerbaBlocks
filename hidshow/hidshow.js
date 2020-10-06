@@ -1,6 +1,6 @@
 const { RichText, MediaUpload, InnerBlocks, InspectorControls } = wp.editor;
 const { registerBlockType } = wp.blocks;
-const { Button, SelectControl, PanelBody, PanelRow, TextControl } = wp.components;
+const { Button, SelectControl, PanelBody, PanelRow, TextControl, ToggleControl } = wp.components;
 
 // Our filter function
 function setBlockCustomClassName( className, blockName ) { return blockName === 'gutentag/hidshow' ? '' : className; }
@@ -17,6 +17,7 @@ registerBlockType( 'gutentag/hidshow', {
 		cardAlt: { attribute: 'alt', selector: '.hidshowImg' },
 
 		titlePosition: {default:'TR'},
+		altStyle: {type:'boolean', default: false}
 	},
 
 	edit( { attributes, setAttributes } ) {
@@ -40,6 +41,14 @@ registerBlockType( 'gutentag/hidshow', {
 							] }
 						/>
 					</PanelRow>
+					<PanelRow>
+						<ToggleControl
+			        label="Do you wanna display extra text?"
+			        help={ !attributes.altStyle ? 'No' : 'Yes' }
+			        checked={ attributes.altStyle }
+			        onChange={ () => setAttributes( { altStyle: ! attributes.altStyle } ) }
+				    />
+					</PanelRow>
 				</PanelBody>
       </InspectorControls>,
 
@@ -60,13 +69,15 @@ registerBlockType( 'gutentag/hidshow', {
 							placeholder="contenido"
 						/>
 					</p>
-          <p className="hidshowTxt rowcol1">
-						<RichText
-							onChange={ content => setAttributes( { hidshowTxt: content } ) }
-							value={ attributes.hidshowTxt }
-							placeholder="contenido"
-						/>
-					</p>
+					{ attributes.altStyle ? (
+	          <p className="hidshowTxt rowcol1">
+							<RichText
+								onChange={ content => setAttributes( { hidshowTxt: content } ) }
+								value={ attributes.hidshowTxt }
+								placeholder="contenido"
+							/>
+						</p> ) : null
+					}
         </figcaption>
       </figure>
 		];
@@ -80,7 +91,7 @@ registerBlockType( 'gutentag/hidshow', {
 				{ image( attributes.cardImg, attributes.cardAlt, 'hidshowImg rowcol1' ) }
         <figcaption className="grid rowcol1">
 					<p className={ "itemTitle rowcol1 itemTitle" + attributes.titlePosition }>{ attributes.itemTitle }</p>
-					<p className="hidshowTxt rowcol1">{ attributes.hidshowTxt }</p>
+					{ attributes.altStyle ? <p className="hidshowTxt rowcol1">{ attributes.hidshowTxt }</p> : null }
         </figcaption>
       </figure>
 		);

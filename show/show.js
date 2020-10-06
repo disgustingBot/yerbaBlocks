@@ -28,7 +28,7 @@ registerBlockType( 'gutentag/show', {
 
       setAttributes( { cardImg: media.url, cardAlt: media.alt } );
 
-      new wp.api.models.Media( { id: 1050 } ).fetch().then(img => {
+      new wp.api.models.Media( { id: 1265 } ).fetch().then(img => {
 				console.log(img);
         setAttributes({ logoImg: img.source_url });
       });
